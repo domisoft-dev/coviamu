@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - COVIAMU</title>
+  <link rel="stylesheet" href="public/css/registro.css">
+  <script src="public/js/verifyLog.js"></script>
+</head>
+<body>
+
+  <h1 class="form-title">Registrarse</h1>
+
+  <form id="user-form" onsubmit="handleFormSubmit(event)">
+    <input type="hidden" id="user-id">
+    <input type="text" id="user-name" placeholder="Nombre" required>
+    <input type="text" id="user-email" placeholder="Correo electrónico" required>
+    <input type="text" id="user-contrasena" placeholder="Contrasena" required>
+    <button type="submit" class="bold">Continuar</button>
+  </form>
+
+  <p class="login-link">¿Ya tienes cuenta? <a href="login">Inicia sesión.</a></p>
+
+  <hr>
+
+  <div id="users"></div>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("user-id").value;
+      const name = document.getElementById("user-name").value;
+      const email = document.getElementById("user-email").value;
+      const contrasena = document.getElementById("user-contrasena").value;
+      const estado = 'no_aprobado';
+
+      if (id) {
+        updateUser(parseInt(id), name, email, contrasena, estado);
+      } else {
+        createUser(name, email, contrasena, estado);
+      }
+
+      clearForm();
+    }
+
+  function createUser(name, email, contrasena, estado) {
+    console.log("Enviando usuario:", name, email);
+    fetch('public/endpointUsers.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, contrasena, estado })
+    })
+    .then(response => response.text())
+    .then(text => {
+    console.log('Respuesta completa:', text);
+    try {
+      const data = JSON.parse(text);
+      console.log('JSON:', data);
+    } catch(e) {
+      console.error('No es JSON válido:', e);
+    }
+  })
+  .catch(err => console.error('Error en fetch:', err));
+  }
+
+
+    function updateUser(id, name, email, contrasena, estado) {
+      fetch('index.php', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, name, email, contrasena, estado })
+      }).then(loadUsers);
+    }
+
+    function deleteUser(id) {
+      fetch('index.php', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      }).then(loadUsers);
+    }
+
+    function editUser(id, name, email, contrasena) {
+      document.getElementById("user-id").value = id;
+      document.getElementById("user-name").value = name;
+      document.getElementById("user-email").value = email;
+      document.getElementById("user-contrasena").value = contrasena;
+    }
+    function clearForm() {
+      document.getElementById("user-id").value = '';
+      document.getElementById("user-name").value = '';
+      document.getElementById("user-email").value = '';
+      document.getElementById("user-contrasena").value = '';
+    }
+
+  </script>
+
+</body>
+</html>

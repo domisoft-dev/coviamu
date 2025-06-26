@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="public/css/admin.css">
+  <script src="public/js/verifyLog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <h1 class="form-title">Login</h1>
+
+  <form id="user-form" onsubmit="handleFormSubmit(event)">
+    <input type="hidden" id="user-id">
+    <input type="text" id="user-name" placeholder="Nombre" required>
+    <input type="text" id="user-contrasena" placeholder="Contrasena" required>
+    <button type="submit" class="bold">Continuar</button>
+  </form>
+
+  <div id="users"></div>
+
+  <script>
+
+function loadUsers(name, contrasena) {
+  fetch('public/endpointUsers.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, contrasena })
+  })
+  .then(res => {
+    if (!res.ok) {
+      if (res.status === 401) {
+        return res.json().then(data => {
+          return { success: false, message: 'Usuario o contraseña incorrectos' };
+        });
+      }
+      throw new Error('Error en login: ' + res.status);
+    }
+    return res.json();
+  })
+  .then(data => {
+    if (data.success) {
+      window.location.href = data.redirect;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: 'Usuario o contrasena incorrectos'
+      });
+    }
+  })
+  .catch(err => {
+    console.error('Error grave:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: 'Ocurrió un error inesperado. Intenta más tarde.'
+      });
+  });
+}
+
+
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("user-id").value;
+      const name = document.getElementById("user-name").value;
+      const contrasena = document.getElementById("user-contrasena").value;
+
+      if (id) {
+        updateUser(parseInt(id), name, contrasena);
+      } else {
+        loadUsers(name, contrasena);
+      }
+
+      clearForm();
+    }
+
+
+    function updateUser(id, name, email, contrasena, estado) {
+      fetch('index.php', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, name, email, contrasena, estado })
+      }).then(loadUsers);
+    }
+
+    function deleteUser(id) {
+      fetch('index.php', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      }).then(loadUsers);
+    }
+
+    function editUser(id, name, email, contrasena) {
+      document.getElementById("user-id").value = id;
+      document.getElementById("user-name").value = name;
+      document.getElementById("user-contrasena").value = contrasena;
+    }
+    function clearForm() {
+      document.getElementById("user-id").value = '';
+      document.getElementById("user-name").value = '';
+      document.getElementById("user-contrasena").value = '';
+    }
+
+  </script>
+
+</body>
+</html>
