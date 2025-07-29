@@ -28,7 +28,7 @@ if (isset($data['nombre']) && isset($data['contrasena'])) {
         echo json_encode([
             'success' => true,
             'autenticado' => true,
-            'redirect' => 'inicio.php'
+            'redirect' => 'panel.php'
         ]);
         exit;
     } else {
