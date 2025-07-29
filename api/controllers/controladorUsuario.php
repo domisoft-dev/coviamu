@@ -1,5 +1,5 @@
 <?php
-require_once '/../models/modeloUsuario.php';
+require_once __DIR__ . '/../models/modeloUsuario.php';
 
 $response = [];
 
