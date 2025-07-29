@@ -21,7 +21,6 @@
   <div id="users"></div>
 
   <script>
-
 function loadUsers(name, contrasena) {
   fetch('public/endpointUsers.php', {
     method: 'POST',
@@ -30,19 +29,9 @@ function loadUsers(name, contrasena) {
     },
     body: JSON.stringify({ name, contrasena })
   })
-  .then(res => {
-    if (!res.ok) {
-      if (res.status === 401) {
-        return res.json().then(data => {
-          return { success: false, message: 'Usuario o contraseña incorrectos' };
-        });
-      }
-      throw new Error('Error en login: ' + res.status);
-    }
-    return res.json();
-  })
+  .then(res => res.json())
   .then(data => {
-    if (data.success) {
+    if (data.success && data.autenticado) {
       window.location.href = data.redirect;
     } else {
       Swal.fire({
