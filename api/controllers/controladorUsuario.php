@@ -75,33 +75,32 @@ public function handleAdminRequest($method, $data) {
 }
 
     public function handleUserRequest($method, $data) {
+        if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        }
         if ($method !== 'POST') {
             http_response_code(405);
             echo json_encode(['error' => 'Método no permitido']);
             return;
         }
 
-        if (!empty($data['name']) && !empty($data['contrasena']) && empty($data['email'])) {
-            $response = ['check' => 'ok'];
+        if (isset($data['name']) && isset($data['contrasena'])) {
             $user = $this->model->getByName($data['name']);
-        if ($user && md5($data['contrasena']) === $user['contrasena']) {
-            $response['check2'] = 'ok';
-        if ($user['estado'] === 'aprobado') {
-            $response['check3'] = 'ok';
-            $_SESSION['user'] = $user['nombre'];
-            $response['success'] = true;
-            $response['redirect'] = 'inicio.php';
+            if ($user && ($data['contrasena'] === $user['contrasena'] || md5($data['contrasena']) === $user['contrasena'])) {
+                if ($user['estado'] === 'aprobado') {
+                $_SESSION['user'] = $user['nombre'];
+                echo json_encode([
+                    'success' => true,
+                    'autenticado' => true,
+                    'redirect' => 'inicio.php'
+            ]);
+            return;
         } else {
             http_response_code(403);
-            $response = ['error' => 'Usuario no aprobado'];
+            echo json_encode(['error' => 'Usuario no aprobado']);
+            return;
         }
-        } else {
-        http_response_code(401);
-
-        $response = ['error' => 'Credenciales inválidas'];
     }
-    echo json_encode($response);
-    return;
 }
 
         if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
