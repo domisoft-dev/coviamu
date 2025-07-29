@@ -2,7 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: /domisoft/index.html");
+header("Location: /coviamu/index.html");
 exit;
 ?>
 
