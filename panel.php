@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin'])) {
-    header("Location: /domisoft/admin");
+    header("Location: /coviamu/admin");
     exit;
 }
 ?>
