@@ -5,6 +5,7 @@
   <title>Registro - COVIAMU</title>
   <link rel="stylesheet" href="public/css/registro.css">
   <script src="public/js/verifyLog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -55,6 +56,14 @@
     .then(response => response.text())
     .then(text => {
     console.log('Respuesta completa:', text);
+    Swal.fire({
+      title: 'Usuario creado',
+      text: 'El usuario esta pendiente de aprobación.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    }).then(() => {
+      loadUsers();
+    });
     try {
       const data = JSON.parse(text);
       console.log('JSON:', data);
