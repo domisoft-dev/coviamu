@@ -44,8 +44,7 @@ El sistema web de COVIAMU permite:
 - 📋 **Gestión de socios**: registro, edición y consulta de datos.  
 - 💰 **Módulo financiero**: control de cuotas y estado de pagos.  
 - 📊 **Reportes básicos**: estadísticas y listados exportables.  
-- 🔒 **Seguridad de acceso**: manejo de usuarios con roles distintos (administrador / socio).  
-- 📢 **Panel de noticias**: avisos y comunicados para la comunidad.  
+- 🔒 **Seguridad de acceso**: manejo de usuarios con roles distintos (administrador / user).  
 - 🎨 **Diseño responsive**: accesible desde computadora y dispositivos móviles.  
 
 ---
@@ -59,14 +58,15 @@ Este sistema fue desarrollado con tecnologías estándar y ampliamente utilizada
   - JavaScript  
 
 - **Backend:**  
-  - PHP  
+  - PHP
 
 - **Base de datos:**  
   - MySQL  
 
 - **Herramientas de desarrollo:**  
   - MySQL Workbench  
-  - Visual Studio Code  
+  - Visual Studio Code
+  - Git & Github
 
 ---
 
@@ -74,13 +74,12 @@ Este sistema fue desarrollado con tecnologías estándar y ampliamente utilizada
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/usuario/domisoft-coviamu.git
+   git clone https://github.com/domisoft-dev/coviamu.git
 2. **Configurar servidor local**
    - Instalar XAMPP o similar.
    - Colocar el proyecto en la carpeta htdocs/.
    - Configurar la base de datos
-   - Importar el archivo SQL ubicado en /db/coviamu.sql.
-   - Verificar credenciales de conexión en config.php.
+   - Importar el archivo SQL
    - Iniciar el servidor
    - Iniciar Apache y MySQL desde XAMPP.
    - Acceder en navegador:
