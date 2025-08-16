@@ -1,0 +1,80 @@
+# 🌐 Domisoft - COVIAMU
+
+Bienvenido al repositorio oficial del proyecto **COVIAMU**, desarrollado por **Domisoft** como parte de una propuesta integral de gestión para cooperativas.  
+
+Este proyecto forma parte de una simulación empresarial dentro del área de programación, donde se nos desafió a crear una **empresa ficticia** que brinde soluciones tecnológicas a cooperativas.  
+En este caso, **Domisoft** presenta su primera solución digital: un sistema web pensado para optimizar la administración de la cooperativa **COVIAMU**.  
+
+---
+
+## 🏢 ¿Qué es Domisoft?
+**Domisoft** es una empresa ficticia de software enfocada en brindar soluciones tecnológicas adaptadas a las necesidades de las **cooperativas modernas**.  
+
+Nuestro objetivo es **acompañar el crecimiento de las organizaciones**, desarrollando herramientas simples, intuitivas y seguras.  
+
+Con Domisoft buscamos:  
+✔️ Facilitar la gestión administrativa.  
+✔️ Mejorar la comunicación con los socios.  
+✔️ Optimizar el tiempo y los recursos de la cooperativa.  
+✔️ Garantizar seguridad y confiabilidad en el manejo de datos.  
+
+---
+
+## 🤝 ¿Qué es COVIAMU?
+**COVIAMU** es una cooperativa ficticia creada para este proyecto.  
+Su misión es **apoyar a sus socios y fomentar la ayuda mutua**, mientras se moderniza mediante soluciones digitales.  
+
+El sistema web de COVIAMU permite:  
+- Registro y administración de socios.  
+- Gestión de aportes, cuotas y pagos.  
+- Acceso rápido a comunicados internos.  
+- Generación de reportes simples y claros.  
+- Automatización de procesos que antes eran manuales.  
+
+---
+
+## 🚀 Características del Sistema
+- 📋 **Gestión de socios**: registro, edición y consulta de datos.  
+- 💰 **Módulo financiero**: control de cuotas y estado de pagos.  
+- 📊 **Reportes básicos**: estadísticas y listados exportables.  
+- 🔒 **Seguridad de acceso**: manejo de usuarios con roles distintos (administrador / socio).  
+- 📢 **Panel de noticias**: avisos y comunicados para la comunidad.  
+- 🎨 **Diseño responsive**: accesible desde computadora y dispositivos móviles.  
+
+---
+
+## ⚙️ Tecnologías utilizadas
+Este sistema fue desarrollado con tecnologías estándar y ampliamente utilizadas:
+
+- **Frontend:**  
+  - HTML5  
+  - CSS3  
+  - JavaScript  
+
+- **Backend:**  
+  - PHP  
+
+- **Base de datos:**  
+  - MySQL  
+
+- **Herramientas de desarrollo:**  
+  - MySQL Workbench  
+  - Visual Studio Code  
+
+---
+
+## 📥 Instalación y uso
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/usuario/domisoft-coviamu.git
+2. **Configurar servidor local**
+   - Instalar XAMPP o similar.
+   - Colocar el proyecto en la carpeta htdocs/.
+   - Configurar la base de datos
+   - Importar el archivo SQL ubicado en /db/coviamu.sql.
+   - Verificar credenciales de conexión en config.php.
+   - Iniciar el servidor
+   - Iniciar Apache y MySQL desde XAMPP.
+   - Acceder en navegador:
+      [http://localhost/domisoft](http://localhost/domisoft)
