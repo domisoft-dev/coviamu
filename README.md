@@ -1,4 +1,9 @@
+<p align="center"><img src="/link" width="200" alt="Domisoft Logo"/></p>
 
+<p align="center">
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/domisoft-dev/coviamu?style=plastic&logo=GitHub&color=green">
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/domisoft-dev/coviamu?logo=GitHub&color=green">
+</p>
 
 # Domisoft - COVIAMU
 
@@ -9,7 +14,7 @@ En este caso, **Domisoft** presenta su primera solución digital: un sistema web
 
 ---
 
-## 🏢 ¿Qué es Domisoft?
+## ¿Qué es Domisoft?
 **Domisoft** es una empresa ficticia de software enfocada en brindar soluciones tecnológicas adaptadas a las necesidades de las **cooperativas modernas**.  
 
 Nuestro objetivo es **acompañar el crecimiento de las organizaciones**, desarrollando herramientas simples, intuitivas y seguras.  
@@ -22,7 +27,7 @@ Con Domisoft buscamos:
 
 ---
 
-## 🤝 ¿Qué es COVIAMU?
+## ¿Qué es COVIAMU?
 **COVIAMU** es una cooperativa ficticia creada para este proyecto.  
 Su misión es **apoyar a sus socios y fomentar la ayuda mutua**, mientras se moderniza mediante soluciones digitales.  
 
@@ -35,7 +40,7 @@ El sistema web de COVIAMU permite:
 
 ---
 
-## 🚀 Características del Sistema
+## Características del Sistema
 - 📋 **Gestión de socios**: registro, edición y consulta de datos.  
 - 💰 **Módulo financiero**: control de cuotas y estado de pagos.  
 - 📊 **Reportes básicos**: estadísticas y listados exportables.  
@@ -45,7 +50,7 @@ El sistema web de COVIAMU permite:
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 Este sistema fue desarrollado con tecnologías estándar y ampliamente utilizadas:
 
 - **Frontend:**  
