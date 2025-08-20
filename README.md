@@ -19,25 +19,25 @@
 >
 > Nuestro objetivo es **acompañar el crecimiento de las organizaciones**, desarrollando herramientas simples, intuitivas y seguras.  
 >
-> Con Domisoft buscamos:  
+Con Domisoft buscamos:  
  - ✔️ Facilitar la gestión administrativa.  
  - ✔️ Mejorar la comunicación con los socios.  
  - ✔️ Optimizar el tiempo y los recursos de la cooperativa.  
- -✔️ Garantizar seguridad y confiabilidad en el manejo de datos.  
->
+ - ✔️ Garantizar seguridad y confiabilidad en el manejo de datos.
+
 ---
 
 ## ¿Qué es COVIAMU?
 > **COVIAMU** es una cooperativa ficticia creada para este proyecto.  
 Su misión es **apoyar a sus socios y fomentar la ayuda mutua**, mientras se moderniza mediante soluciones digitales.  
 >
-> El sistema web de COVIAMU permite:  
+El sistema web de COVIAMU permite:  
  - Registro y administración de socios.  
  - Gestión de aportes, cuotas y pagos.  
  - Acceso rápido a comunicados internos.  
  - Generación de reportes simples y claros.  
- - Automatización de procesos que antes eran manuales.  
->
+ - Automatización de procesos que antes eran manuales.
+
 ---
 
 ## Características del Sistema
@@ -46,7 +46,7 @@ Su misión es **apoyar a sus socios y fomentar la ayuda mutua**, mientras se mod
 > - 📊 **Reportes básicos**: estadísticas y listados exportables.  
 > - 🔒 **Seguridad de acceso**: manejo de usuarios con roles distintos (administrador / user).  
 > - 🎨 **Diseño responsive**: accesible desde computadora y dispositivos móviles.  
->
+
 ---
 
 ##  Tecnologías utilizadas
