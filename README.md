@@ -1,4 +1,4 @@
-<p align="center"><img src="/link" width="200" alt="Domisoft Logo"/></p>
+<p align="center"><img src="/public/img/domisoft.png" width="200" alt="Domisoft Logo"/></p>
 
 <p align="center">
 <img alt="GitHub forks" src="https://img.shields.io/github/forks/domisoft-dev/coviamu?style=plastic&logo=GitHub&color=green">
