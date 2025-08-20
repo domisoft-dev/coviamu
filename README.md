@@ -7,10 +7,10 @@
 
 # Domisoft - COVIAMU
 
-Bienvenido al repositorio oficial del proyecto **COVIAMU**, desarrollado por **Domisoft** como parte de una propuesta integral de gestión para cooperativas.  
+> Bienvenido al repositorio oficial del proyecto **COVIAMU**, desarrollado por **Domisoft** como parte de una > propuesta integral de gestión para cooperativas.  
 
-Este proyecto forma parte de una simulación empresarial dentro del área de programación, donde se nos desafió a crear una **empresa ficticia** que brinde soluciones tecnológicas a cooperativas.  
-En este caso, **Domisoft** presenta su primera solución digital: un sistema web pensado para optimizar la administración de la cooperativa **COVIAMU**.  
+> Este proyecto forma parte de una simulación empresarial dentro del área de programación, donde se nos desafió a > crear una **empresa ficticia** que brinde soluciones tecnológicas a cooperativas.  
+> En este caso, **Domisoft** presenta su primera solución digital: un sistema web pensado para optimizar la > administración de la cooperativa **COVIAMU**.  
 
 ---
 
