@@ -5,30 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COVIAMU - Cooperativa de Viviendas</title>
   <link rel="stylesheet" href="public/css/index.css" />
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
   
 <nav class="floating-nav">
-    <ul>
-      <li><a href="#">Inicio</a></li>
-      <li><a href="registro">Registro</a></li>
-      <li><a href="login">Iniciar Sesión</a></li>
-      <li><a href="admin">Gestión</a></li>
-    </ul>
+    <a href="#"><img src="public/img/coviamu.webp" class="coviamuLogo" alt="COVIAMU Logo"></a>
+    <div id="txts">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="login">Mi cuenta</a></li>
+        <li><a href="registro" class="btn">Ser parte <i class="bx bx-arrow-up-right-stroke bx-beat"></i></a></li>
+      </ul>
+    </div>
+
+    <div id="txts">
+      <a href="admin">Gestión <i class='bx  bxs-key'  ></i></a>
+    </div>
   </nav>
 
   <section id="inicio" class="hero">
     <div class="hero-content">
-      <h1>Bienvenido a COVIAMU</h1>
-      <p>Somos una cooperativa de vivienda de ayuda mutua, 
-        donde el esfuerzo colectivo construye hogares y comunidad. 
-        Juntos diseñamos un futuro digno, justo y sostenible para todas las familias.</p>
-      <a href="registro" class="btn">Unirse</a>
+      <img src="public/img/coviamu.webp" alt="" class="heroLogo">
+      <div class="txtLine">
+        <h2>De sueños a hogares | Juntos <i class='bx  bxs-hard-hat'  ></i> </h2>
+      </div>
     </div>
   </section>
 
-  <section class="relleno"><h2>¿Por qué elegir COVIAMU?</h2><p>Compromiso, comunidad y futuro compartido.</p></section>
-  <section class="relleno"><h2>Noticias</h2><p>Últimas novedades sobre el avance de nuestras viviendas.</p></section>
-  <section class="relleno"><h2>Contacto</h2><p>Podés escribirnos a info@coviamu.org</p></section>
+  <section id="nosotros" class="section-card">
+    <div class="card">
+      <h2>Nosotros</h2>
+      <p>
+        En <strong>COVIAMU</strong>, creemos que el hogar no es solo un techo,
+        sino el espacio donde nacen los sueños y se construye comunidad.
+        Somos una <strong>cooperativa de viviendas</strong> creada por y para familias 
+        que buscan una alternativa accesible, solidaria y sostenible para 
+        alcanzar su casa propia.
+        Nuestro objetivo es unir esfuerzos, compartir recursos y acompañarnos 
+        mutuamente en el camino hacia una vida digna y estable. 
+        Cada socio es parte activa del proceso: desde la planificación hasta
+        la construcción y el crecimiento de nuestra comunidad.
+        Con transparencia, compromiso y trabajo colectivo, 
+        en COVIAMU demostramos que juntos se llega más lejos.
+      </p>
+    </div>
+  </section>
+
+  <section id="contacto" class="section-card">
+    <div class="card contact-card">
+      <h2>Contacto</h2>
+      <p>Podés escribirnos a <a href="mailto:info@coviamu.org">info@coviamu.org</a></p>
+    </div>
+  </section>
+
 </body>
 </html>
