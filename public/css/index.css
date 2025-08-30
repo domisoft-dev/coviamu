@@ -11,6 +11,82 @@ body {
   overflow-x: hidden;
 }
 
+.form-title {
+  font-size: 2.5rem;
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(255, 109, 109);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: rgb(221, 90, 90);
+}
+
+.login-link {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.login-link a {
+  color: rgb(255, 109, 109);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.top-left-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgb(255, 109, 109);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.top-left-button:hover {
+  background-color: rgb(221, 88, 88);
+}
+
+hr {
+  margin: 30px auto;
+  max-width: 400px;
+}
+
 .floating-nav {
   position: fixed;
   top: 0;
@@ -204,6 +280,98 @@ i {
 
 .contact-card a:hover {
   text-decoration: underline;
+}
+
+.panel-content {
+  padding: 100px 20px 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.panel-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.panel-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #1a1a1a;
+}
+
+.btn {
+  background-color: rgb(255, 109, 109);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: white;
+  color: rgb(255, 109, 109);
+}
+
+#users-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #e6f0ff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card {
+  background: white;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 6px solid #fa6464;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions .accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-actions .reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.user-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.user-actions button:hover {
+  opacity: 0.9;
 }
 
 /* Responsivo */

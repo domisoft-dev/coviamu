@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="public/css/admin.css">
+  <link rel="stylesheet" href="public/css/index.css">
   <script src="public/js/verifyLog.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-  <a href="index" class="top-left-button">Volver</a>
-  
+<nav class="floating-nav">
+    <a href="#"><img src="public/img/coviamu.webp" class="coviamuLogo" alt="COVIAMU Logo"></a>
+    <div id="txts">
+      <ul>
+        <li><a href="index">Inicio</a></li>
+        <li><a href="index#nosotros">Nosotros</a></li>
+        <li><a href="index#contacto">Contacto</a></li>
+        <li><a href="login">Mi cuenta</a></li>
+        <li><a href="registro" class="btn">Ser parte <i class="bx bx-arrow-up-right-stroke bx-beat"></i></a></li>
+      </ul>
+    </div>
+
+    <div id="txts">
+      <a href="admin">Gestión <i class='bx  bxs-key'  ></i></a>
+    </div>
+  </nav>
+
   <h1 class="form-title">Login</h1>
 
   <form id="user-form" onsubmit="handleFormSubmit(event)">
@@ -23,35 +39,35 @@
   <div id="users"></div>
 
   <script>
-function loadUsers(name, contrasena) {
-  fetch('public/endpointUsers.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name, contrasena })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success && data.autenticado) {
-      window.location.href = data.redirect;
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Ups...',
-        text: 'Usuario o contrasena incorrectos'
+    function loadUsers(name, contrasena) {
+      fetch('public/endpointUsers.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, contrasena })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.autenticado) {
+          window.location.href = data.redirect;
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: 'Usuario o contrasena incorrectos'
+          });
+        }
+      })
+      .catch(err => {
+        console.error('Error grave:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: 'Ocurrió un error inesperado. Intenta más tarde.'
+          });
       });
     }
-  })
-  .catch(err => {
-    console.error('Error grave:', err);
-      Swal.fire({
-        icon: 'error',
-        title: 'Ups...',
-        text: 'Ocurrió un error inesperado. Intenta más tarde.'
-      });
-  });
-}
 
 
 

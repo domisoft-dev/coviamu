@@ -3,14 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro - COVIAMU</title>
-  <link rel="stylesheet" href="public/css/registro.css">
+  <link rel="stylesheet" href="public/css/index.css">
   <script src="public/js/verifyLog.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
-  <a href="index" class="top-left-button">Volver</a>
   
+<nav class="floating-nav">
+    <a href="#"><img src="public/img/coviamu.webp" class="coviamuLogo" alt="COVIAMU Logo"></a>
+    <div id="txts">
+      <ul>
+        <li><a href="index">Inicio</a></li>
+        <li><a href="index#nosotros">Nosotros</a></li>
+        <li><a href="index#contacto">Contacto</a></li>
+        <li><a href="login">Mi cuenta</a></li>
+        <li><a href="registro" class="btn">Ser parte <i class="bx bx-arrow-up-right-stroke bx-beat"></i></a></li>
+      </ul>
+    </div>
+
+    <div id="txts">
+      <a href="admin">Gestión <i class='bx  bxs-key'  ></i></a>
+    </div>
+  </nav>
+
   <h1 class="form-title">Registrarse</h1>
 
   <form id="user-form" onsubmit="handleFormSubmit(event)">
