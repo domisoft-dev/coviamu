@@ -12,11 +12,14 @@ if (!isset($_SESSION['admin'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Gestion</title>
     <link rel="stylesheet" href="public/css/index.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-  <form action="api/routes/logout.php" method="post" style="position: relative">
-    <button type="submit" class="logout-btn">Cerrar sesión</button>
+  <form action="api/routes/logout.php" method="post">
+    <div class='button-left-container'>
+      <button type="submit" class="logout-btn"><i class='bx bx-arrow-from-left-stroke'></i> Cerrar sesión</button>
+    </div>
   </form>
 
   <section class="panel-content">
@@ -42,7 +45,9 @@ if (!isset($_SESSION['admin'])) {
           const div = document.createElement('div');
           div.className = 'user-card';
           div.innerHTML = `
-            <p><strong>${user.nombre}</strong> (${user.email})</p>
+            <p><strong>[${user.id}] ${user.nombre}</strong> (${user.email})</p>
+            <br/>
+            <p><strong>Comprobantes</strong></p>
             ${user.estado !== 'aprobado' ? `
               <button class="btn" onclick="cambiarEstado(${user.id}, 'aprobado')">Aceptar</button>
               <button class="btn" onclick="rechazar(${user.id})">Rechazar</button>

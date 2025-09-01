@@ -12,27 +12,32 @@ if (!isset($_SESSION['user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COVIAMU - Cooperativa de Viviendas</title>
   <link rel="stylesheet" href="public/css/index.css" />
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-  <form action="api/routes/logout.php" method="post" style="position: relative">
-    <button type="submit" class="logout-btn">Cerrar sesión</button>
+  <form action="api/routes/logout.php" method="post">
+    <div class='button-left-container'>
+      <button type="submit" class="logout-btn"><i class='bx bx-arrow-from-left-stroke'></i>Cerrar sesión</button>
+    </div>
   </form>
 
-  <nav class="floating-nav">
-    <ul>
-      <li><a href="#">Inicio</a></li>
-    </ul>
-  </nav>
-
-  <section id="inicio" class="hero">
-    <div class="hero-content">
+  <section id="regist-horas" class="panel-content">
+    <div>
       <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['user']); ?></h1>
+      <div>
+        <h3>Registrar horas</h3>
+        <p>
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum  
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="relleno"><h2>¿Por qué elegir COVIAMU?</h2><p>Compromiso, comunidad y futuro compartido.</p></section>
-  <section class="relleno"><h2>Noticias</h2><p>Últimas novedades sobre el avance de nuestras viviendas.</p></section>
-  <section class="relleno"><h2>Contacto</h2><p>Podés escribirnos a info@coviamu.org</p></section>
 </body>
 </html>
