@@ -1,0 +1,24 @@
+.form-title {
+  font-size: 2.5rem;
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.panel-content {
+  padding: 100px 20px 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.panel-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.panel-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #1a1a1a;
+}

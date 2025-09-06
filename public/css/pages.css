@@ -1,0 +1,130 @@
+.hero {
+  min-height: max-content;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+              url("../img/stock.jpg") no-repeat center center;
+  background-size: cover;
+  transition: background 1s ease-in-out;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: rgb(255, 109, 109);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.hero .btn2 {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background-color: rgb(255, 109, 109);
+  color: white;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero .btn2:hover {
+  background-color: rgb(255, 148, 148);
+}
+
+.txtLine {
+  background-color: #fff;
+  border-radius: 1rem;
+  opacity: 80%;
+  padding: 0.5rem 1.3rem;
+}
+
+.section-card {
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+  background-color: #f0f8ff;
+}
+
+.card {
+  max-width: 800px;
+  background: linear-gradient(145deg, #ffffff, #ffe6e6);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-0.2rem);
+}
+
+.card h2 {
+  font-size: 2.2rem;
+  color: rgb(255, 109, 109);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.contact-card a {
+  color: rgb(255, 109, 109);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+#users-container {
+  max-width: 75%;
+  margin: 40px auto;
+  padding: 20px;
+  background: #e6f0ff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card {
+  background: white;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border-left: 6px solid #fa6464;
+}
+
+.user-info h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions .accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-actions .reject {
+  background-color: #dc3545;
+  color: white;
+}

@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f8ff;
+  color: rgb(255, 109, 109);
+  overflow-x: hidden;
+}
+
+hr {
+  margin: 30px auto;
+  max-width: 400px;
+}
+
+i {
+  vertical-align: middle;
+  font-size: 1.3rem;
+}
+
+.liner {
+  background-color: rgb(255, 109, 109);
+  color: white;
+}

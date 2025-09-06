@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COVIAMU - Cooperativa de Viviendas</title>
-  <link rel="stylesheet" href="public/css/index.css" />
+  <link rel="stylesheet" href="public/css/main.css" />
   <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>

@@ -1,0 +1,54 @@
+.floating-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fafafa;
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  display: flex;
+  border-bottom-width: 1px;
+  border-color: black;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  height: 4rem;
+  margin-inline: auto;
+}
+
+.floating-nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.floating-nav li {
+  text-decoration: none;
+}
+
+.floating-nav a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+}
+
+.floating-nav .btn {
+    color: white !important;
+}
+
+#txts a {
+  color: #000d30;
+  display: flex;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+#txts a:hover {
+  background-color: #6b6b6b;
+  color: #e6f0ff;
+}
+
+.coviamuLogo {
+  height: 7rem;
+}

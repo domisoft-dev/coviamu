@@ -11,7 +11,7 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Gestion</title>
-    <link rel="stylesheet" href="public/css/index.css">
+    <link rel="stylesheet" href="public/css/main.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
