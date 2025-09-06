@@ -40,35 +40,43 @@
 
   <script>
     function loadUsers(name, contrasena) {
-      fetch('public/endpointUsers.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, contrasena })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.autenticado) {
-          window.location.href = data.redirect;
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Ups...',
-            text: 'Usuario o contrasena incorrectos'
-          });
-        }
-      })
-      .catch(err => {
-        console.error('Error grave:', err);
-          Swal.fire({
-            icon: 'error',
-            title: 'Ups...',
-            text: 'Ocurrió un error inesperado. Intenta más tarde.'
-          });
-      });
+  fetch('public/endpointUsers.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, contrasena })
+  })
+  .then(async res => {
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch(e) {
+      throw new Error("Respuesta inválida del servidor: " + text);
     }
 
+    if (!res.ok) {
+      // Lanzar un error para que caiga en catch
+      let msg = data.error || 'Error inesperado';
+      throw new Error(msg);
+    }
+
+    return data;
+  })
+  .then(data => {
+    // Login exitoso
+    if (data.success) {
+      window.location.href = data.redirect;
+    }
+  })
+  .catch(err => {
+    console.error('Error:', err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Ups...',
+      text: err.message
+    });
+  });
+}
 
 
     function handleFormSubmit(event) {

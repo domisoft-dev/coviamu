@@ -3,6 +3,7 @@ session_start();
 header('Content-Type: application/json');
 require_once '../api/controllers/controladorUsuario.php';
 
+
 $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {

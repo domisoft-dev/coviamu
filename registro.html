@@ -63,33 +63,31 @@
     }
 
   function createUser(name, email, contrasena, estado) {
-    console.log("Enviando usuario:", name, email);
     fetch('public/endpointUsers.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, contrasena, estado })
-    })
-    .then(response => response.text())
-    .then(text => {
-    console.log('Respuesta completa:', text);
-    Swal.fire({
-      title: 'Usuario creado',
-      text: 'El usuario esta pendiente de aprobación.',
-      icon: 'success',
-      confirmButtonText: 'Aceptar'
-    }).then(() => {
-      loadUsers();
-    });
-    try {
-      const data = JSON.parse(text);
-      console.log('JSON:', data);
-    } catch(e) {
-      console.error('No es JSON válido:', e);
-    }
-  })
-  .catch(err => console.error('Error en fetch:', err));
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, email, contrasena, estado })
+})
+.then(async res => {
+  const text = await res.text();
+  if (!text) throw new Error("Respuesta vacía del servidor");
+  try {
+    return JSON.parse(text);
+  } catch(e) {
+    throw new Error("JSON inválido: " + text);
   }
-
+})
+.then(data => {
+  console.log('JSON:', data);
+  Swal.fire({
+    title: data.success ? 'Usuario creado' : 'Error',
+    text: data.error || 'El usuario está pendiente de aprobación.',
+    icon: data.success ? 'success' : 'error',
+    confirmButtonText: 'Aceptar'
+  });
+})
+.catch(err => console.error('Error en fetch:', err));
+}
 
     function updateUser(id, name, email, contrasena, estado) {
       fetch('index.php', {

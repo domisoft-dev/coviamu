@@ -147,85 +147,89 @@ public function handleAdminRequest($method, $data) {
 }
 
     public function handleUserRequest($method, $data) {
-        if (session_status() === PHP_SESSION_NONE) {
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
-        }
-        if ($method !== 'POST') {
-            http_response_code(405);
-            echo json_encode(['error' => 'Método no permitido']);
+    }
+    if ($method !== 'POST') {
+        http_response_code(405);
+        echo json_encode(['error' => 'Método no permitido']);
+        return;
+    }
+
+    // CREAR USUARIO (registro)
+    if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
+        $existingUser = $this->model->getByName($data['name']);
+        if ($existingUser) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Usuario ya existe']);
             return;
         }
 
-        if (isset($_FILES['comprobante'])) {
-            $this->agregarRecibo($_FILES['comprobante']);
+        $existingEmail = $this->model->getByEmail($data['email']);
+        if ($existingEmail) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Email ya registrado']);
             return;
         }
 
-        if (isset($data['horas'])) {
-        if (!isset($_SESSION['user'])) {
-            http_response_code(401);
-            echo json_encode(['error' => 'No autorizado']);
-            return;
-        }
+        $hashedPass = md5($data['contrasena']);
+        $result = $this->model->create($data['name'], $data['email'], $hashedPass, 'no_aprobado');
 
-        $user = $this->model->getByName($_SESSION['user']);
-        if (!$user) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Usuario no encontrado']);
-            return;
-        }
-
-        $success = $this->model->updateHours($user['id'], intval($data['horas']));
-        if ($success) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Horas agregadas correctamente',
-                'horas'   => $this->model->getHoras($user['id'])
-            ]);
+        if ($result) {
+            echo json_encode(['success' => true]);
         } else {
             http_response_code(500);
-            echo json_encode(['error' => 'Error al agregar horas']);
+            echo json_encode(['error' => 'Error al crear usuario']);
         }
         return;
     }
 
-        if (isset($data['name']) && isset($data['contrasena'])) {
-            $user = $this->model->getByName($data['name']);
-            if ($user && ($data['contrasena'] === $user['contrasena'] || md5($data['contrasena']) === $user['contrasena'])) {
-                if ($user['estado'] === 'aprobado') {
-                $_SESSION['user'] = $user['nombre'];
-                echo json_encode([
-                    'success' => true,
-                    'autenticado' => true,
-                    'redirect' => 'inicio.php'
-            ]);
-            return;
-        } else {
-            http_response_code(403);
-            echo json_encode(['error' => 'Usuario no aprobado']);
-            return;
-            }
-
-    if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
-            $hashedPass = md5($data['contrasena']);
-            $result = $this->model->create(
-                $data['name'],
-                $data['email'],
-                $hashedPass,
-                'no_aprobado'
-            );
-            if ($result) {
-                echo json_encode(['success' => true]);
-            } else {
-                http_response_code(500);
-                echo json_encode(['error' => 'Error al crear usuario']);
-            }
-            return;
-        }
-
-        http_response_code(400);
-        echo json_encode(['error' => 'Datos insuficientes']);
+    // LOGIN (requiere sesión)
+    if (isset($data['name']) && isset($data['contrasena'])) {
+    $user = $this->model->getByName($data['name']);
+    if (!$user) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Usuario no encontrado']);
+        return;
     }
+
+    if ($user['estado'] !== 'aprobado') {
+        http_response_code(403);
+        echo json_encode(['error' => 'Usuario no aprobado']);
+        return;
+    }
+
+    $inputPassword = trim($data['contrasena']); 
+    $dbPassword = $user['contrasena'];
+
+    // Debug opcional
+    // echo json_encode([
+    //     'db' => $dbPassword,
+    //     'input' => $inputPassword,
+    //     'md5input' => md5($inputPassword)
+    // ]);
+
+    // Comparar en plano o en hash
+    $matchPlano = ($inputPassword === $dbPassword);
+    $matchHash  = (md5($inputPassword) === $dbPassword);
+
+    if (!$matchPlano && !$matchHash) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Contraseña incorrecta']);
+        return;
+    }
+
+    $_SESSION['user'] = $user['nombre'];
+    echo json_encode([
+        'success' => true,
+        'autenticado' => true,
+        'redirect' => 'inicio.php'
+    ]);
+    return;
 }
-}
+
+    // Si no es registro ni login
+    http_response_code(400);
+    echo json_encode(['error' => 'Datos insuficientes']);
+    }
 }
