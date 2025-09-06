@@ -10,10 +10,11 @@ class controladorUsuario {
         $this->model = new modeloUsuario();
     }
 
-public function agregarHoras($userId, $horas) {
+public function agregarHoras($user, $horas) {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+    $user = $this->model->getByName($_SESSION['user']);
 
     if (!isset($_SESSION['user'])) {
         http_response_code(401);
@@ -28,12 +29,12 @@ public function agregarHoras($userId, $horas) {
         return;
     }
 
-    $success = $this->model->updateHours($userId, $horas);
+    $success = $this->model->updateHours($user, $horas);
     if ($success) {
         echo json_encode([
             'success' => true,
             'message' => 'Horas agregadas correctamente',
-            'horas' => $this->model->getHoras($userId)
+            'horas' => $this->model->getHoras($user)
         ]);
     } else {
         http_response_code(500);
@@ -113,6 +114,34 @@ public function handleAdminRequest($method, $data) {
             return;
         }
 
+        if (isset($data['horas'])) {
+        if (!isset($_SESSION['user'])) {
+            http_response_code(401);
+            echo json_encode(['error' => 'No autorizado']);
+            return;
+        }
+
+        $user = $this->model->getByName($_SESSION['user']);
+        if (!$user) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Usuario no encontrado']);
+            return;
+        }
+
+        $success = $this->model->updateHours($user['id'], intval($data['horas']));
+        if ($success) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Horas agregadas correctamente',
+                'horas'   => $this->model->getHoras($user['id'])
+            ]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al agregar horas']);
+        }
+        return;
+    }
+
         if (isset($data['name']) && isset($data['contrasena'])) {
             $user = $this->model->getByName($data['name']);
             if ($user && ($data['contrasena'] === $user['contrasena'] || md5($data['contrasena']) === $user['contrasena'])) {
@@ -128,8 +157,7 @@ public function handleAdminRequest($method, $data) {
             http_response_code(403);
             echo json_encode(['error' => 'Usuario no aprobado']);
             return;
-        }
-    }}
+            }
 
     if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
             $hashedPass = md5($data['contrasena']);
@@ -151,4 +179,6 @@ public function handleAdminRequest($method, $data) {
         http_response_code(400);
         echo json_encode(['error' => 'Datos insuficientes']);
     }
+}
+}
 }
