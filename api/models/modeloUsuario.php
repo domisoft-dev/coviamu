@@ -73,6 +73,18 @@ class modeloUsuario {
         return $stmt->execute();
     }
 
+    public function updateRecibo($userId, $filename) {
+    $stmt = $this->db->prepare("UPDATE users SET recibo = ? WHERE id = ?");
+    $stmt->bind_param("si", $filename, $userId);
+    $stmt->execute();
+    return $stmt->affected_rows > 0;
+    }
+
+    public function getRecibos() {
+    $result = $this->db->query("SELECT id, nombre, recibo FROM users WHERE recibo IS NOT NULL");
+    return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     
         // ADMINS //
     public function getAllAdmins() {

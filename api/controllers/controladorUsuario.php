@@ -9,6 +9,48 @@ class controladorUsuario {
     public function __construct() {
         $this->model = new modeloUsuario();
     }
+public function agregarRecibo($file) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['user'])) {
+        http_response_code(401);
+        echo json_encode(['error' => 'No autorizado']);
+        return;
+    }
+
+    $user = $this->model->getByName($_SESSION['user']);
+    if (!$user) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Usuario no encontrado']);
+        return;
+    }
+
+    // Directorio para subir recibos
+    $uploadDir = __DIR__ . '/../../public/uploads/recibos/';
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+
+    $filename = $user['id'] . '_' . time() . '_' . basename($file['name']);
+    $targetFile = $uploadDir . $filename;
+
+    if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+        // Guardar en DB el nombre del archivo en el campo "recibo"
+        $success = $this->model->updateRecibo($user['id'], $filename);
+        if ($success) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Recibo subido correctamente'
+            ]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al registrar el recibo en la base de datos']);
+        }
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Error al subir el archivo']);
+    }
+}
 
 public function agregarHoras($user, $horas) {
     if (session_status() === PHP_SESSION_NONE) {
@@ -111,6 +153,11 @@ public function handleAdminRequest($method, $data) {
         if ($method !== 'POST') {
             http_response_code(405);
             echo json_encode(['error' => 'Método no permitido']);
+            return;
+        }
+
+        if (isset($_FILES['comprobante'])) {
+            $this->agregarRecibo($_FILES['comprobante']);
             return;
         }
 

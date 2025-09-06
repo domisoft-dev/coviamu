@@ -71,32 +71,32 @@ if (!isset($_SESSION['user'])) {
   }
 
   function uploadReceipt(file) {
-    const formData = new FormData();
-    formData.append('comprobante', file);
+  const formData = new FormData();
+  formData.append('comprobante', file);
 
-    fetch('public/endpointUsers.php', {
-      method: 'POST',
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.success){
-        Swal.fire({
-          icon: 'success',
-          title: 'Comprobante subido',
-          text: 'El archivo se subió correctamente'
-        });
-        document.getElementById("comprobante").value = '';
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: data.error || 'No se pudo subir el archivo'
-        });
-      }
-    })
-    .catch(err => console.error("Error en uploadReceipt:", err));
-  }
+  fetch('public/endpointUsers.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success){
+      Swal.fire({
+        icon: 'success',
+        title: 'Comprobante subido',
+        text: data.message
+      });
+      document.getElementById("comprobante").value = '';
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.error || 'No se pudo subir el archivo'
+      });
+    }
+  })
+  .catch(err => console.error("Error en uploadReceipt:", err));
+}
 
   document.getElementById('horas-form').addEventListener('submit', function(e){
     e.preventDefault();

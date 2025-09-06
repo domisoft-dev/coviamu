@@ -47,7 +47,10 @@ if (!isset($_SESSION['admin'])) {
           div.innerHTML = `
             <p><strong>[${user.id}] ${user.nombre}</strong> (${user.email})</p>
             <br/>
-            <p><strong>Comprobantes</strong></p>
+            <button class="btn" onclick="">Horas trabajadas ${user.horas}</button>
+            <br/>
+            <a href="public/uploads/recibos/${user.recibo}"><button class="btn" onclick="">Recibos</button></a>
+            <br/>
             ${user.estado !== 'aprobado' ? `
               <button class="btn" onclick="cambiarEstado(${user.id}, 'aprobado')">Aceptar</button>
               <button class="btn" onclick="rechazar(${user.id})">Rechazar</button>
