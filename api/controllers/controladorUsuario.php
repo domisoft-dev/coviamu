@@ -10,7 +10,36 @@ class controladorUsuario {
         $this->model = new modeloUsuario();
     }
 
+public function agregarHoras($userId, $horas) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
+    if (!isset($_SESSION['user'])) {
+        http_response_code(401);
+        echo json_encode(['error' => 'No autorizado']);
+        return;
+    }
+
+    $horas = intval($horas);
+    if ($horas <= 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Cantidad de horas inválida']);
+        return;
+    }
+
+    $success = $this->model->updateHours($userId, $horas);
+    if ($success) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Horas agregadas correctamente',
+            'horas' => $this->model->getHoras($userId)
+        ]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Error al agregar horas']);
+    }
+}
 
 public function verificarAdmin($nombre, $contrasena) {
     $user = $this->model->getAdminByName($nombre);
@@ -100,10 +129,9 @@ public function handleAdminRequest($method, $data) {
             echo json_encode(['error' => 'Usuario no aprobado']);
             return;
         }
-    }
-}
+    }}
 
-        if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
+    if (!empty($data['name']) && !empty($data['email']) && !empty($data['contrasena'])) {
             $hashedPass = md5($data['contrasena']);
             $result = $this->model->create(
                 $data['name'],

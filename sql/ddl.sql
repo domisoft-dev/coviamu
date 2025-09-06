@@ -6,7 +6,8 @@ CREATE TABLE users (
     nombre VARCHAR(100),
     email VARCHAR(100),
     contrasena VARCHAR(100),
-    estado VARCHAR(100)
+    estado VARCHAR(100),
+    horas INT
 );
 CREATE TABLE admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,11 +15,11 @@ CREATE TABLE admins (
   contrasena VARCHAR(100)
 );
 
-INSERT INTO users (nombre, email, contrasena, estado)
+INSERT INTO users (nombre, email, contrasena, estado, horas)
 VALUES
-('Laura', 'lauragomez@gmail.com', 'Laurita123', 'no_aprobado'),
-('Felipe', 'felipepro@gmail.com', 'siempreborro2', 'no_aprobado'),
-('Marta', 'marta_lopez@hotmail.com', '124567890', 'aprobado');
+('Laura', 'lauragomez@gmail.com', 'Laurita123', 'no_aprobado', 0),
+('Felipe', 'felipepro@gmail.com', 'siempreborro2', 'no_aprobado', 0),
+('Marta', 'marta_lopez@hotmail.com', '124567890', 'aprobado', 0);
 
 INSERT INTO admins (nombre, contrasena)
 VALUES 
