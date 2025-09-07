@@ -41,9 +41,9 @@ class modeloUsuario {
     return $stmt->affected_rows > 0;
     }
 
-    public function create($nombre, $email, $contrasena, $estado) {
-        $stmt = $this->db->prepare("INSERT INTO users (nombre, email, contrasena, estado) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param('ssss', $nombre, $email, $contrasena, $estado);
+    public function create($nombre, $email, $contrasena, $estado, $horas) {
+        $stmt = $this->db->prepare("INSERT INTO users (nombre, email, contrasena, estado, horas) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param('ssssi', $nombre, $email, $contrasena, $estado, $horas);
         return $stmt->execute();
     }
 
@@ -52,13 +52,6 @@ class modeloUsuario {
     $stmt->bind_param("ii", $horas, $id);
     $stmt->execute();
     return $stmt->affected_rows > 0;
-    }
-
-    public function getHoras($id){
-    $stmt = $this->db->prepare("SELECT horas FROM users WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc()['horas'];
     }
 
     public function update($id, $nombre, $email, $contrasena, $estado) {
@@ -85,7 +78,22 @@ class modeloUsuario {
     return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    
+        // GETS
+    public function getHoras($id){
+        $stmt = $this->db->prepare("SELECT horas FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['horas'];
+    }
+
+    public function getEmail($id){
+        $stmt = $this->db->prepare("SELECT email FROM users WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['email'];
+    }
+
+
         // ADMINS //
     public function getAllAdmins() {
         $result = $this->db->query("SELECT * FROM admins");

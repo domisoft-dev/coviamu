@@ -28,3 +28,21 @@ input {
 .login-link a:hover {
   text-decoration: underline;
 }
+
+.form-box {
+    margin-top: 3rem;
+}
+
+#regist-horas > div > div {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+#regist-horas form {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

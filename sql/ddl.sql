@@ -19,7 +19,7 @@ CREATE TABLE admins (
 INSERT INTO users (nombre, email, contrasena, estado, horas, recibo)
 VALUES
 ('Laura', 'lauragomez@gmail.com', 'Laurita123', 'no_aprobado', 0, "nulo"),
-('Felipe', 'felipepro@gmail.com', 'siempreborro2', 'no_aprobado', 0, "nulo"),
+('Felipe', 'felipepro@gmail.com', 'siempre123', 'no_aprobado', 0, "nulo"),
 ('Marta', 'marta_lopez@hotmail.com', '124567890', 'aprobado', 0, "nulo");
 
 INSERT INTO admins (nombre, contrasena)

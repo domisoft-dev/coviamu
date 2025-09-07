@@ -92,31 +92,65 @@
   text-decoration: underline;
 }
 
+/* ================= USERS ================= */
 #users-container {
-  max-width: 75%;
+  max-width: 90%; /* más ancho */
   margin: 40px auto;
   padding: 20px;
-  background: #e6f0ff;
+  background: #fff; /* blanco */
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* sombra marcada */
 }
 
 .user-card {
-  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px 20px;
   margin-bottom: 15px;
-  border-radius: 10px;
-  border-left: 6px solid #fa6464;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.user-info h3 {
-  font-size: 1.1rem;
+.user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.user-table {
+    border-collapse: separate;
+    border-spacing: 1rem 1rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* separación nombre-mail */
+}
+
+.user-info h3, .user-info p {
   margin: 0;
+  color: #fff; /* texto blanco */
+  padding: 4px 10px;
+  border-radius: 8px;
+  background-color: #fa6464; /* contraste */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .user-actions {
   display: flex;
-  gap: 10px;
+  gap: 10px; /* botones uno al lado del otro */
+}
+
+.user-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .user-actions .accept {
@@ -124,7 +158,17 @@
   color: white;
 }
 
+.user-actions .accept:hover {
+  background-color: #34c759;
+  transform: translateY(-2px);
+}
+
 .user-actions .reject {
   background-color: #dc3545;
   color: white;
+}
+
+.user-actions .reject:hover {
+  background-color: #e55353;
+  transform: translateY(-2px);
 }
