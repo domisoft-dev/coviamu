@@ -1,3 +1,16 @@
+# ================================================================================
+# Project:       https://github.com/domisoft-dev/coviamu
+# File:          .htaccess
+# Author:        domisoft-dev
+# Description:   Configuración de reescritura de URLs para COVIAMU.
+#                Redirige las URLs sin extensión a archivos .html correspondientes.
+# ================================================================================
+# Sections Overview:
+# - RewriteEngine On: activa el módulo de reescritura de Apache
+# - RewriteCond %{REQUEST_FILENAME} !-f: solo aplica si no es un archivo existente
+# - RewriteRule ^([^\.]+)$ $1.html [NC,L]: agrega extensión .html a URLs sin punto
+# ================================================================================
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]

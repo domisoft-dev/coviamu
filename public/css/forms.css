@@ -1,3 +1,23 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          forms.css
+* Author:        domisoft-dev
+* Description:   Estilos para formularios de registro, login y secciones relacionadas.
+================================================================================
+* Sections Overview:
+* - form: contenedor de formularios, centrado, con flex column y separación entre campos.
+* - input: campos de texto, padding, borde, border-radius y tamaño de fuente.
+* - .login-link: estilo para links de login, centrado y márgenes.
+* - .login-link a: color principal, sin subrayado, bold; hover subrayado.
+* - .form-box: margen superior para separar del resto del contenido.
+* - #regist-horas > div > div: contenedor de horas, layout flex con gap y centrado.
+* - #regist-horas form: formulario de horas, flex column, separación y ancho máximo.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 form {
   margin: 0 auto;
   display: flex;

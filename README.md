@@ -1,3 +1,21 @@
+<!--
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          README.md
+* Author:        domisoft-dev
+* Description:   Documentación oficial del proyecto COVIAMU desarrollado por Domisoft.
+*                Incluye información general, objetivos, características, tecnologías 
+*                utilizadas e instrucciones de instalación y uso.
+================================================================================
+* Sections Overview:
+* - Introducción: breve descripción del proyecto y su propósito.
+* - ¿Qué es Domisoft?: presentación de la empresa ficticia desarrolladora.
+* - ¿Qué es COVIAMU?: descripción de la cooperativa y funcionalidades principales.
+* - Características del Sistema: lista de módulos y funcionalidades destacadas.
+* - Tecnologías utilizadas: frontend, backend, base de datos y herramientas de desarrollo.
+* - Instalación y uso: pasos para clonar el repositorio, configurar el servidor y acceder al sistema.
+================================================================================
+-->
 <p align="center"><img src="/public/img/domisoft.png" width="200" alt="Domisoft Logo"/></p>
 
 <p align="center">

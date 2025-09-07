@@ -1,3 +1,20 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          layout.css
+* Author:        domisoft-dev
+* Description:   Estilos para títulos de formularios y secciones de paneles.
+================================================================================
+* Sections Overview:
+* - .form-title: tamaño grande, márgenes superior e inferior, centrado.
+* - .panel-content: padding amplio, ancho máximo, centrado de contenido y texto.
+* - .panel-content h1: título del panel, tamaño grande, margen inferior.
+* - .panel-content p: párrafos del panel, tamaño mediano, margen inferior, color oscuro.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 .form-title {
   font-size: 2.5rem;
   margin-top: 6rem;

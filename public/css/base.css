@@ -1,3 +1,22 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          base.css
+* Author:        domisoft-dev
+* Description:   Estilos base para COVIAMU. Contiene reset general, tipografía,
+*                colores principales y estilos generales para elementos comunes.
+================================================================================
+* Sections Overview:
+* - * selector: aplica box-sizing border-box y resetea margin/padding para todo.
+* - body: define fuente principal, color de fondo, color de texto y evita scroll horizontal.
+* - hr: margen automático y ancho máximo para separar secciones visualmente.
+* - i: ajusta alineación vertical y tamaño de íconos.
+* - .liner: clase para fondo principal (rgb(255,109,109)) y texto en blanco.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 * {
   box-sizing: border-box;
   margin: 0;

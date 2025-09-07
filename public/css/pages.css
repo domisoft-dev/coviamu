@@ -1,3 +1,21 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          pages.css
+* Author:        domisoft-dev
+* Description:   Estilos para secciones de página, hero, cards, contacto y usuarios.
+================================================================================
+* Sections Overview:
+* - .hero / .hero-content / .hero h1 / .hero p / .hero .btn2: estilos de la sección principal
+* - .txtLine: barra de texto dentro del hero
+* - .section-card / .card / .card h2 / .card p: estilos de cards informativas
+* - .contact-card a: enlaces de contacto
+* - #users-container / .user-card / .user-table / .user-info / .user-actions: estilos de lista de usuarios y acciones
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 .hero {
   min-height: max-content;
   padding: 1rem;

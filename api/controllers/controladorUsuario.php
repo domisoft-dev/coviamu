@@ -1,4 +1,31 @@
 <?php
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          controladorUsuario.php
+* Author:        domisoft-dev
+* Description:   Controlador principal que maneja las operaciones de usuarios 
+*                y administradores en el sistema COVIAMU.
+================================================================================
+* Classes:
+* - controladorUsuario
+*   - __construct(): inicializa el modelo de usuario.
+*   - verificarAdmin($nombre, $contrasena): verifica credenciales de administrador.
+*   - handleAdminRequest($method, $data): maneja acciones de administrador
+*     (aprobar usuarios, eliminar usuarios, obtener listado).
+*   - handleUserRequest($method, $data, $files = null): maneja acciones de usuarios
+*     (registro, login, agregar horas, subir recibo, obtener estadísticas).
+================================================================================
+* Notes:
+* - Se utilizan sesiones para validar usuarios y administradores.
+* - Las contraseñas se almacenan en MD5; si se encuentra en texto plano, se convierte automáticamente.
+* - Se manejan respuestas JSON y códigos HTTP adecuados según la operación.
+* - Validaciones de archivos subidos incluyen extensión y MIME type permitidos.
+================================================================================
+* Libraries: None (requiere modeloUsuario.php)
+================================================================================
+*/
+
 require_once __DIR__ . '/../models/modeloUsuario.php';
 
 $response = [];

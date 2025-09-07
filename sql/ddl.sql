@@ -1,3 +1,21 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          ddl.sql
+* Author:        domisoft-dev
+* Description:   Script de creación de base de datos para el proyecto COVIAMU.
+*                Contiene la creación de la base, tablas de usuarios y administradores,
+*                y registros iniciales de ejemplo.
+================================================================================
+* Sections Overview:
+* - CREATE DATABASE Domisoft: crea la base de datos principal.
+* - USE Domisoft: selecciona la base de datos para operaciones posteriores.
+* - CREATE TABLE users: define tabla de usuarios con campos id, nombre, email, contrasena, estado, horas y recibo.
+* - CREATE TABLE admins: define tabla de administradores con campos id, nombre y contrasena.
+* - INSERT INTO users: inserta usuarios de prueba con distintos estados y datos iniciales.
+* - INSERT INTO admins: inserta administradores de prueba con credenciales iniciales.
+================================================================================
+*/
 CREATE DATABASE Domisoft;
 USE Domisoft;
 

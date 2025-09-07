@@ -1,3 +1,18 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          main.css
+* Author:        domisoft-dev
+* Description:   Archivo principal que importa todos los estilos parciales del proyecto.
+================================================================================
+* Sections Overview:
+* - Importa base.css, layout.css, navbar.css, forms.css, components.css, pages.css y responsive.css
+*   para centralizar todos los estilos en un solo archivo.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 @import url("base.css");
 @import url("layout.css");
 @import url("navbar.css");

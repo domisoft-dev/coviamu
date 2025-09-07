@@ -1,3 +1,21 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          navbar.css
+* Author:        domisoft-dev
+* Description:   Estilos para la barra de navegación flotante y enlaces principales.
+================================================================================
+* Sections Overview:
+* - .floating-nav: barra fija superior con diseño flex y estilos generales
+* - .floating-nav ul / li / a: estilos para lista de navegación y enlaces
+* - .floating-nav .btn: estilos específicos para botones en la navbar
+* - #txts a: estilo de enlaces internos y hover
+* - .coviamuLogo: tamaño del logo de la cooperativa
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 .floating-nav {
   position: fixed;
   top: 0;

@@ -1,4 +1,27 @@
 <?php
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          panel.php
+* Author:        domisoft-dev
+* Description:   Panel de gestión para administradores de COVIAMU.
+*                Permite aprobar o rechazar usuarios registrados y visualizar sus datos.
+================================================================================
+* Librerías:
+* - Boxicons (https://cdn.boxicons.com)
+* - SweetAlert2 (https://cdn.jsdelivr.net/npm/sweetalert2@11)
+================================================================================
+* Sections Overview:
+* - PHP: manejo de sesión y redirección si no hay admin logueado
+* - HTML: estructura de la página, formularios de logout, secciones de contenido y tabla de usuarios
+* - JS: fetch de usuarios desde endpointCooperativas.php
+*       - Funciones cambiarEstado y rechazar para actualizar o eliminar usuarios
+*       - Creación dinámica de tabla de usuarios
+*       - Feedback con SweetAlert2
+================================================================================
+*/
+
+
 session_start();
 if (!isset($_SESSION['admin'])) {
     header("Location: /coviamu/admin");

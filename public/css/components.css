@@ -1,3 +1,23 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          components.css
+* Author:        domisoft-dev
+* Description:   Estilos para componentes interactivos: botones, links y acciones.
+================================================================================
+* Sections Overview:
+* - button, .btn: estilos base para botones y clases .btn, con colores, padding,
+*                  borde, border-radius, tipografía y transición.
+* - button:hover, .btn:hover: cambio de color de fondo al pasar el mouse.
+* - .top-left-button, .logout-btn: botones de acciones específicas, con posicionamiento,
+*                                   colores y padding ajustado.
+* - .top-left-button: botón ubicado en esquina superior izquierda, transición hover.
+* - .logout-btn: botón de cerrar sesión, posicionado a la derecha, transición hover.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 button,
 .btn {
   background-color: rgb(255, 109, 109);

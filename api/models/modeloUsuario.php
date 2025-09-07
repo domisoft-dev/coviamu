@@ -1,4 +1,37 @@
 <?php
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          modelousuario.php
+* Author:        domisoft-dev
+* Description:   Modelo de datos para la gestión de usuarios y administradores.
+*                Incluye métodos para CRUD, actualización de horas y recibos,
+*                así como manejo de admins y contraseñas.
+================================================================================
+* Classes:
+* - modeloUsuario
+*   - __construct(): inicializa la conexión a la base de datos.
+*   - getAll(): obtiene todos los usuarios.
+*   - getById($id): obtiene un usuario por su ID.
+*   - getByName($name): obtiene un usuario por nombre.
+*   - getByEmail($email): obtiene un usuario por email.
+*   - aprobar($id, $nuevoEstado): actualiza el estado de un usuario.
+*   - create($nombre, $email, $contrasena, $estado, $horas): crea un nuevo usuario.
+*   - updateHours($id, $horas): suma horas al usuario.
+*   - update($id, $nombre, $email, $contrasena, $estado): actualiza datos de usuario.
+*   - eliminar($id): elimina un usuario.
+*   - updateRecibo($userId, $filename): registra el recibo de un usuario.
+*   - getRecibos(): obtiene recibos subidos por los usuarios.
+*   - getHoras($id): obtiene las horas de un usuario.
+*   - getEmail($id): obtiene el email de un usuario.
+*   - getAllAdmins(): obtiene todos los administradores.
+*   - getAdminByName($name): obtiene un admin por nombre.
+*   - updatePassword($id, $nuevaContrasena): actualiza la contraseña de un admin.
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
 require_once __DIR__ . '/../core/database.php';
 
 class modeloUsuario {

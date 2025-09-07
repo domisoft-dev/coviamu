@@ -1,4 +1,23 @@
 <?php
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          inicio.php
+* Author:        domisoft-dev
+* Description:   Página principal para usuarios autenticados.
+*                Permite registrar horas trabajadas y subir comprobantes.
+================================================================================
+* Librerías:
+* - Boxicons (https://cdn.boxicons.com)
+* - SweetAlert2 (https://cdn.jsdelivr.net/npm/sweetalert2@11)
+================================================================================
+* Sections Overview:
+* - PHP: manejo de sesión y redirección si no hay usuario logueado
+* - HTML: estructura de la página, formularios y botones
+* - JS: funciones addHours, uploadReceipt, fetchUserStats y eventos submit
+================================================================================
+*/
+
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: /coviamu/login");
