@@ -26,7 +26,6 @@
 ================================================================================
 */
 
-<?php
 require_once __DIR__ . '/../models/modeloUsuario.php';
 
 $response = [];
@@ -82,17 +81,73 @@ class controladorUsuario {
             exit;
         }
 
+        /*
+        ================================================================================
+        * Block: Actualizar estado
+        * Description: Aprueba un usuario para el login de sucuenta
+        ================================================================================
+        */
+
         if ($method === 'POST' && isset($data['id']) && isset($data['estado'])) {
             $success = $this->model->aprobar($data['id'], $data['estado']);
             echo json_encode($success ? ['success'=>true] : ['success'=>false,'error'=>'Error al actualizar estado']);
             exit;
         }
 
-        if ($method === 'POST' && isset($data['id']) && !isset($data['estado'])) {
+        /*
+        ================================================================================
+        * Block: Rechazar usuario
+        * Description: Rechaza un usuario de aprobación, eliminando su solicitud.
+        ================================================================================
+        */
+
+        if ($method === 'POST' && isset($data['id']) && !isset($data['estado']) && !isset($data['aprobarRecibo'])) {
             $success = $this->model->eliminar($data['id']);
             echo json_encode($success ? ['success'=>true] : ['success'=>false,'error'=>'Error al eliminar usuario']);
             exit;
         }
+
+        /*
+        ================================================================================
+        * Block: Aprobar recibo
+        * Description: Aprueba el recibo del usuario seleccionado
+        ================================================================================
+        */
+
+        if ($method === 'POST' && isset($data['id']) && isset($data['aprobarRecibo'])) {
+            $userId = $data['id'];
+            $aprobar = $data['aprobarRecibo']; // 1 = aprobar
+
+            $success = $this->model->aprobarRecibo($userId, $aprobar);
+
+            if ($success) {
+                // --- ACTUALIZAR JSON ---
+                $jsonFile = __DIR__ . '/../../public/uploads/recibos/registro.json';
+                if (!file_exists($jsonFile)) file_put_contents($jsonFile, json_encode([]));
+
+                $jsonData = json_decode(file_get_contents($jsonFile), true);
+
+                if (isset($jsonData[$userId])) {
+                    $lastIndex = count($jsonData[$userId]) - 1;
+                    $jsonData[$userId][$lastIndex]['approved'] = $aprobar;
+                }
+            
+                // Guardar cambios en JSON
+                file_put_contents($jsonFile, json_encode($jsonData, JSON_PRETTY_PRINT));
+                echo json_encode(['success' => true, 'approved' => $aprobar]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['success' => false, 'error' => 'Error al aprobar recibo']);
+            }
+            exit;
+        }
+
+        /*
+        ================================================================================
+        * Block: getAll
+        * Description: Obtiene todos los usuarios
+        ================================================================================
+        */
 
         $users = $this->model->getAll();
         echo json_encode($users);
@@ -156,61 +211,135 @@ class controladorUsuario {
         }
 
         /*
-        ================================================================================
-        * Block: Agregar horas
-        * Description: Suma horas al usuario logueado y valida cantidad.
-        ================================================================================
-        */
-        if (isset($data['horas'])) {
-            if (!isset($_SESSION['user'])) { http_response_code(401); echo json_encode(['error'=>'No autorizado']); return; }
-            $user = $this->model->getByName($_SESSION['user']);
-            if (!$user) { http_response_code(404); echo json_encode(['error'=>'Usuario no encontrado']); return; }
-
-            $horas = intval($data['horas']);
-            if ($horas <= 0) { http_response_code(400); echo json_encode(['error'=>'Cantidad de horas inválida']); return; }
-
-            $success = $this->model->updateHours($user['id'], $horas);
-            echo json_encode($success ? ['success'=>true,'message'=>'Horas agregadas correctamente','horas'=>$this->model->getHoras($user['id'])] : ['error'=>'Error al agregar horas']);
-            return;
-        }
-
-        /*
-        ================================================================================
-        * Block: Subir recibo
-        * Description: Valida y guarda el recibo del usuario logueado.
-        ================================================================================
+        ===============================================================================
+        * Block: Subir recibo con rate-limit 24h
+        ===============================================================================
         */
         if (!empty($_FILES['comprobante'])) {
-            if (!isset($_SESSION['user'])) { http_response_code(401); echo json_encode(['error'=>'No autorizado']); return; }
+            if (!isset($_SESSION['user'])) {
+                http_response_code(401);
+                echo json_encode(['error'=>'No autorizado']);
+                return;
+            }
+        
             $user = $this->model->getByName($_SESSION['user']);
-            if (!$user) { http_response_code(404); echo json_encode(['error'=>'Usuario no encontrado']); return; }
-
-            $uploadDir = __DIR__ . '/../../public/uploads/recibos/';
+            if (!$user) {
+                http_response_code(404);
+                echo json_encode(['error'=>'Usuario no encontrado']);
+                return;
+            }
+        
+            date_default_timezone_set('America/Montevideo'); 
+        
+            // --- Ratelimit 24h ---
+            $registroPath = __DIR__ . "/../../public/uploads/recibos/registro.json";
+            $registro = file_exists($registroPath) ? json_decode(file_get_contents($registroPath), true) : [];
+            $lastReceiptTime = isset($registro[$user['id']]) ? end($registro[$user['id']])['uploaded_at'] : null;
+        
+            if ($lastReceiptTime && (time() - strtotime($lastReceiptTime)) < 24*60*60) {
+                http_response_code(429);
+                echo json_encode(['error'=>'Solo se puede subir un recibo cada 24 horas']);
+                return;
+            }
+        
+            $userFolder = 'DSFT-ID' . $user['id'];
+            $uploadDir = __DIR__ . "/../../public/uploads/recibos/$userFolder/";
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
-
+        
             $allowedExtensions = ['pdf','jpg','jpeg','png'];
-            $allowedMimeTypes = ['application/pdf','image/jpeg','image/png'];
-
+            $allowedMimeTypes  = ['application/pdf','image/jpeg','image/png'];
+        
             $fileName = $_FILES['comprobante']['name'];
             $fileTmp  = $_FILES['comprobante']['tmp_name'];
             $fileType = mime_content_type($fileTmp);
             $fileExt  = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
+        
             if (!in_array($fileExt, $allowedExtensions) || !in_array($fileType, $allowedMimeTypes)) {
-                http_response_code(400); echo json_encode(['error'=>'Archivo no permitido']); return;
+                http_response_code(400);
+                echo json_encode(['error'=>'Archivo no permitido']);
+                return;
             }
-
-            $filename = $user['id'].'_'.time().'_'.basename($fileName);
-            $targetFile = $uploadDir.$filename;
-
+        
+            $filename = "recibo_" . time() . "_COVIAMU" . basename($fileName);
+            $targetFile = $uploadDir . $filename;
+        
             if (move_uploaded_file($fileTmp, $targetFile)) {
-                $success = $this->model->updateRecibo($user['id'], $filename);
-                echo json_encode($success ? ['success'=>true,'message'=>'Recibo subido correctamente'] : ['error'=>'Error al registrar el recibo']);
+                $success = $this->model->updateRecibo($user['id'], $filename, 0); // reset approved
+            
+                // Registrar historial en JSON
+                if(!isset($registro[$user['id']])) $registro[$user['id']] = [];
+                $registro[$user['id']][] = [
+                    'filename' => $filename,
+                    'uploaded_at' => date('Y-m-d H:i:s'),
+                    'approved' => 0
+                ];
+                file_put_contents($registroPath, json_encode($registro, JSON_PRETTY_PRINT));
+            
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Recibo subido correctamente',
+                    'filename' => $filename
+                ]);
             } else {
-                http_response_code(500); echo json_encode(['error'=>'Error al subir el archivo']);
+                http_response_code(500);
+                echo json_encode(['error'=>'Error al subir el archivo']);
             }
             return;
         }
+        
+        /*
+        ===============================================================================
+        * Block: Agregar horas con limitación 8h cada 24h
+        ===============================================================================
+        */
+        if (isset($data['horas'])) {
+            if (!isset($_SESSION['user'])) {
+                http_response_code(401);
+                echo json_encode(['error'=>'No autorizado']);
+                return;
+            }
+        
+            $user = $this->model->getByName($_SESSION['user']);
+            if (!$user) { http_response_code(404); echo json_encode(['error'=>'Usuario no encontrado']); return; }
+        
+            $horas = intval($data['horas']);
+            if ($horas <= 0) { http_response_code(400); echo json_encode(['error'=>'Cantidad de horas inválida']); return; }
+        
+            // --- Ratelimit horas ---
+            $horasPath = __DIR__ . "/../../public/uploads/recibos/horas.json";
+            $horasData = file_exists($horasPath) ? json_decode(file_get_contents($horasPath), true) : [];
+            $today = time();
+            $suma24h = 0;
+        
+            if (isset($horasData[$user['id']])) {
+                foreach ($horasData[$user['id']] as $registroHora) {
+                    if (($today - strtotime($registroHora['timestamp'])) < 24*60*60) {
+                        $suma24h += $registroHora['horas'];
+                    }
+                }
+            }
+        
+            if (($suma24h + $horas) > 8) {
+                http_response_code(429);
+                echo json_encode(['error'=>'No puedes agregar más de 8 horas en 24 horas']);
+                return;
+            }
+        
+            // Registrar horas
+            if(!isset($horasData[$user['id']])) $horasData[$user['id']] = [];
+            $horasData[$user['id']][] = [
+                'horas' => $horas,
+                'timestamp' => date('Y-m-d H:i:s')
+            ];
+            file_put_contents($horasPath, json_encode($horasData, JSON_PRETTY_PRINT));
+        
+            // Actualizar DB
+            $success = $this->model->updateHours($user['id'], $horas);
+        
+            echo json_encode($success ? ['success'=>true,'message'=>'Horas agregadas correctamente','horas'=>$this->model->getHoras($user['id'])] : ['error'=>'Error al agregar horas']);
+            return;
+        }
+        
 
         /*
         ================================================================================

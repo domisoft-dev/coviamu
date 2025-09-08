@@ -67,9 +67,18 @@ class modeloUsuario {
         return $stmt->get_result()->fetch_assoc();
     }
 
+    // APROBAR CUENTA
     public function aprobar($id, $nuevoEstado){
     $stmt = $this->db->prepare("UPDATE users SET estado = ? WHERE id = ?");
     $stmt->bind_param('si', $nuevoEstado, $id);
+    $stmt->execute();
+    return $stmt->affected_rows > 0;
+    }
+
+    // APROBAR RECIBO DE USUARIO
+    public function aprobarRecibo($userId, $aprobar) {
+    $stmt = $this->db->prepare("UPDATE users SET recibo_aprobado = ? WHERE id = ?");
+    $stmt->bind_param("ii", $aprobar, $userId);
     $stmt->execute();
     return $stmt->affected_rows > 0;
     }
@@ -99,9 +108,9 @@ class modeloUsuario {
         return $stmt->execute();
     }
 
-    public function updateRecibo($userId, $filename) {
-    $stmt = $this->db->prepare("UPDATE users SET recibo = ? WHERE id = ?");
-    $stmt->bind_param("si", $filename, $userId);
+    public function updateRecibo($userId, $filename, $aprobar = 0) {
+    $stmt = $this->db->prepare("UPDATE users SET recibo = ?, recibo_aprobado = ? WHERE id = ?");
+    $stmt->bind_param("sii", $filename, $aprobar, $userId);
     $stmt->execute();
     return $stmt->affected_rows > 0;
     }

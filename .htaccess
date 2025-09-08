@@ -2,15 +2,27 @@
 # Project:       https://github.com/domisoft-dev/coviamu
 # File:          .htaccess
 # Author:        domisoft-dev
-# Description:   Configuración de reescritura de URLs para COVIAMU.
-#                Redirige las URLs sin extensión a archivos .html correspondientes.
+# Description:   Configuración de reescritura de URLs y seguridad de archivos JSON
+#                para COVIAMU.
+#                - Redirige las URLs sin extensión a archivos .html correspondientes.
+#                - Protege archivos JSON de ser accedidos públicamente.
+#                - Los archivos JSON contienen historial de recibos y horas trabajadas,
+#                  incluyendo timestamps y estado de aprobación.
 # ================================================================================
 # Sections Overview:
-# - RewriteEngine On: activa el módulo de reescritura de Apache
-# - RewriteCond %{REQUEST_FILENAME} !-f: solo aplica si no es un archivo existente
-# - RewriteRule ^([^\.]+)$ $1.html [NC,L]: agrega extensión .html a URLs sin punto
+# - <Files "registro.json">: deniega acceso público al JSON de historial de recibos.
+# - <Files "horas.json">: deniega acceso público al JSON de historial de horas trabajadas.
+# - RewriteEngine On: activa el módulo de reescritura de Apache.
+# - RewriteCond %{REQUEST_FILENAME} !-f: aplica solo si no es un archivo existente.
+# - RewriteRule ^([^\.]+)$ $1.html [NC,L]: agrega extensión .html a URLs sin punto.
 # ================================================================================
 
+<Files "registro.json">
+    Require all denied
+</Files>
+<Files "horas.json">
+    Require all denied
+</Files>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]

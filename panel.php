@@ -70,12 +70,12 @@ fetch('public/endpointCooperativas.php')
     table.innerHTML = `
       <thead>
         <tr>
+          <th></th>
           <th>ID</th>
           <th>Nombre</th>
           <th>Mail</th>
           <th>Horas trabajadas</th>
           <th>Comprobantes</th>
-          <th></th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -86,6 +86,11 @@ fetch('public/endpointCooperativas.php')
     data.forEach(user => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
+        ${user.estado !== 'aprobado' ? `
+        <button class="btnAceptar" onclick="cambiarEstado(${user.id}, 'aprobado')">Aceptar</button>
+        <button class="btnRechazar" onclick="rechazar(${user.id})">Rechazar</button>
+        ` : '<em>Usuario aprobad@</em>'}
+
         <td>${user.id}</td>
         <td>${user.nombre}</td>
         <td>${user.email}</td>
@@ -93,20 +98,29 @@ fetch('public/endpointCooperativas.php')
           <p>${user.horas}</p>
         </td>
         <td>
-          <a href="public/uploads/recibos/${user.recibo}" target="_blank">
-          <button class="btn">Recibos</button>
-          </a>
-        </td>
-        <td>
-          ${user.estado !== 'aprobado' ? `
-            <button class="btn" onclick="cambiarEstado(${user.id}, 'aprobado')">Aceptar</button>
-            <button class="btn" onclick="rechazar(${user.id})">Rechazar</button>
-          ` : '<em>Ya aprobado</em>'}
+          ${
+            user.recibo
+              ? `<a href="public/uploads/recibos/DSFT-ID${user.id}/${user.recibo}" target="_blank">
+              <button class="btn">Ver Recibo</button>
+              </a>`
+              : `<button class="btn" onclick="Swal.fire({
+                  icon: 'info',
+                  title: 'Sin recibo',
+                  text: 'El usuario no ha subido ningún recibo aún.'
+              })">Ver Recibo</button>`
+          }
+        <br>
+          ${
+            user.recibo && user.recibo_aprobado == 1
+            ? '<em>✔ Aprobado</em>'
+            : user.recibo
+            ? `<button class="btnAceptar" onclick="aprobarRecibo(${user.id})">Aprobar Recibo</button>`
+            : ''
+          }
         </td>
       `;
       tbody.appendChild(tr);
     });
-
     container.appendChild(table);
   });
 
@@ -147,6 +161,34 @@ function rechazar(id) {
       alert("Error al actualizar el estado");
     }
   });
+}
+
+function aprobarRecibo(id){
+  fetch('public/endpointCooperativas.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+          id: id,
+          aprobarRecibo: 1
+      })
+  })
+  .then(res => res.json())
+  .then(resp => {
+      if(resp.success){
+          Swal.fire({
+              icon: 'success',
+              title: 'Recibo aprobado',
+              text: 'El recibo del usuario fue aprobado correctamente'
+          }).then(() => location.reload());
+      } else {
+          Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: resp.error || 'No se pudo aprobar el recibo'
+          });
+      }
+  })
+  .catch(err => console.error(err));
 }
 </script>
 

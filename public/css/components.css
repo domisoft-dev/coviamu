@@ -22,10 +22,10 @@ button,
 .btn {
   background-color: rgb(255, 109, 109);
   color: white;
-  padding: 12px 20px;
+  padding: 0.4rem 0.3rem;
   border: none;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -35,6 +35,22 @@ button:hover,
 .btn:hover {
   background-color: rgb(221, 90, 90);
   color: #fff;
+}
+
+.btnAceptar {
+  background-color: rgb(73, 226, 73);
+}
+
+.btnAceptar:hover {
+  background-color: rgb(27, 155, 27);
+}
+
+.btnRechazar {
+  background-color: rgb(235, 30, 30);
+}
+
+.btnRechazar:hover {
+  background-color: rgb(185, 35, 35);
 }
 
 .top-left-button,
