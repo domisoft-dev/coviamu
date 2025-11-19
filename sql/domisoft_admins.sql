@@ -36,7 +36,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'Ian','11111111'),(2,'Samuel','22222222'),(3,'Renzo','33333333'),(4,'Seba','44444444'),(5,'Manuel','55555555');
+INSERT INTO `admins` VALUES (1,'Ian123','11111111'),(2,'Samuel','22222222'),(3,'Renzo','33333333'),(4,'Seba','44444444'),(5,'Manuel','55555555');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-09-06 14:13:20
+
 
