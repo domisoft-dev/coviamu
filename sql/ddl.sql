@@ -44,7 +44,7 @@ VALUES
 
 INSERT INTO admins (nombre, contrasena)
 VALUES 
-('Ian', MD5('11111111')),
+('Ian123', MD5('11111111')),
 ('Samuel', MD5('22222222')),
 ('Renzo', MD5('33333333')),
 ('Seba', MD5('44444444')),
